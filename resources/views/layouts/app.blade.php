@@ -9,7 +9,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }} | @yield('title')</title>
-
+    <style>
+        body {
+            display: none
+        }
+    </style>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -30,12 +34,14 @@
         @include('includes.layout.navbar')
 
 
+
         <main class="container mt-3">
+            @include('includes.layout.alert')
             @yield('content')
         </main>
     </div>
     {{-- Eventuali sript --}}
-    @yield('script')
+    @yield('scripts')
 </body>
 
 </html>

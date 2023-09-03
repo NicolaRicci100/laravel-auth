@@ -3,7 +3,7 @@
 @section('content')
     <header class="d-flex align-items-center justify-content-between">
         <h1>Posts</h1>
-        <a href="{{ route('admin.posts.create') }}" class="btn btn-outline-success">Nuovo Post</a>
+        <a href="{{ route('admin.posts.create') }}" class="btn btn-outline-primary">Nuovo Post</a>
     </header>
     <hr>
     <table class="table table-light table-striped">
@@ -28,13 +28,14 @@
                     <td>{{ $post->updated_at }}</td>
                     <td>
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-sm btn-outline-primary">
+                            <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-sm btn-outline-success">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-sm btn-outline-warning ms-2">
                                 <i class="fas fa-pencil"></i>
                             </a>
-                            <form action="{{ route('admin.posts.destroy', $post) }}" method="POST" class="ms-2">
+                            <form action="{{ route('admin.posts.destroy', $post) }}" method="POST"
+                                class="delete-form ms-2">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-outline-danger">
@@ -55,4 +56,10 @@
 
         </tbody>
     </table>
+    @if ($posts->hasPages())
+        {{ $posts->links() }}
+    @endif
+@endsection
+@section('scripts')
+    @vite('resources/js/delete-confirmation.js')
 @endsection

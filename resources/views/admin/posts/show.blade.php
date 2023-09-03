@@ -22,7 +22,7 @@
             <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-outline-warning">
                 <i class="fas fa-pencil"></i> Modifica
             </a>
-            <form action="{{ route('admin.posts.destroy', $post) }}" method="POST" class="ms-2">
+            <form action="{{ route('admin.posts.destroy', $post) }}" method="POST" class="delete-form ms-2">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-outline-danger">
@@ -31,4 +31,7 @@
             </form>
         </div>
     </footer>
+@endsection
+@section('scripts')
+    @vite('resources/js/delete-confirmation.js')
 @endsection
