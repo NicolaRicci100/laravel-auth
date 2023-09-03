@@ -3,7 +3,7 @@
 @section('content')
     <header class="d-flex align-items-center justify-content-between">
         <h1>Posts</h1>
-        <a href="{{ route('admin.posts.create') }}" class="btn btn-outline-primary">Nuovo Post</a>
+        <a href="{{ route('admin.posts.create') }}" class="btn btn-outline-success">Nuovo Post</a>
     </header>
     <hr>
     <table class="table table-light table-striped">
@@ -28,7 +28,7 @@
                     <td>{{ $post->updated_at }}</td>
                     <td>
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-sm btn-outline-success">
+                            <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-sm btn-outline-primary">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-sm btn-outline-warning ms-2">
