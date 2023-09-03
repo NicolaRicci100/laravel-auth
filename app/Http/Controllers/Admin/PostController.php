@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use GrahamCampbell\ResultType\Success;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -33,6 +34,21 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'title' => 'required|string|max:50|unique:posts',
+                'content' => 'required|string',
+                'image' => 'nullable|url'
+            ],
+            [
+                'title.required' => 'Il titolo è obbligatorio',
+                'title.max' => 'Il titolo deve essere lungo massimo :max caratteri',
+                'title.unique' => "Esiste già un post dal titolo $request->title",
+                'content.required' => 'Non può esistere un post senza contenuto',
+                'image.url' => "L'url inserito non è valido"
+            ]
+        );
+
         $data = $request->all();
         $post = new Post();
         $post->fill($data);
@@ -62,6 +78,21 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $request->validate(
+            [
+                'title' => ['required', 'string', 'max:50', Rule::unique('posts')->ignore($post->id)],
+                'content' => 'required|string',
+                'image' => 'nullable|url'
+            ],
+            [
+                'title.required' => 'Il titolo è obbligatorio',
+                'title.max' => 'Il titolo deve essere lungo massimo :max caratteri',
+                'title.unique' => "Esiste già un post dal titolo $request->title",
+                'content.required' => 'Non può esistere un post senza contenuto',
+                'image.url' => "L'url inserito non è valido"
+            ]
+        );
+
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
         $post->update($data);

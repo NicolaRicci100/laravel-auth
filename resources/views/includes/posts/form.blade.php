@@ -1,16 +1,16 @@
 @if ($post->exists)
     {{-- Se volgio modificare un post --}}
-    <form action="{{ route('admin.posts.update', $post) }}" method="POST">
+    <form action="{{ route('admin.posts.update', $post) }}" method="POST" novalidate>
         @method('PUT')
     @else
         {{-- Se volgio aggiungere un post --}}
-        <form action="{{ route('admin.posts.store', $post) }}" method="POST">
+        <form action="{{ route('admin.posts.store', $post) }}" method="POST" novalidate>
 @endif
 @csrf
 <div class="row">
     <div class="col-6">
         <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
+            <label for="title" class="form-label">Titolo</label>
             <input type="text" class="form-control" id="title" name="title"
                 value="{{ old('title', $post->title) }}" placeholder="Inserisci il titolo" maxlength="50" required>
         </div>
