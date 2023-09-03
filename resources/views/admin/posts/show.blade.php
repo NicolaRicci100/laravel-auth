@@ -8,7 +8,9 @@
     </header>
     <hr>
     <div class="clearfix">
-        <img class="float-start me-2 img-fluid" width="250" src="{{ $post->image }}" alt="{{ $post->title }}">
+        @if ($post->image)
+            <img class="float-start me-2 img-fluid" width="250" src="{{ $post->image }}" alt="{{ $post->title }}">
+        @endif
         <p>{{ $post->content }}</p>
         <div>
             <strong>Creato il:</strong> {{ $post->created_at }}

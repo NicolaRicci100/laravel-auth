@@ -2,8 +2,11 @@
 @section('title', 'Create Post')
 
 @section('content')
-    <header>
-        <h1>Crea Post</h1>
+    <header class="d-flex justify-content-between align-items-center">
+        <h1>Modifica Post</h1>
+        <a href="{{ route('admin.posts.index') }}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i> Torna indietro
+        </a>
     </header>
     <hr>
     <form action="{{ route('admin.posts.store') }}" method="POST">
@@ -19,7 +22,8 @@
             <div class="col-6">
                 <div class="mb-3">
                     <label class="form-label">Slug</label>
-                    <input type="text" class="form-control" id="slug" maxlength="50" disabled>
+                    <input type="text" class="form-control" id="slug" maxlength="50"
+                        value="{{ Str::slug(old('title'), '-') }}" disabled>
                 </div>
             </div>
             <div class="col-12">
