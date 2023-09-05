@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Home')
+
 @section('content')
     <div class="jumbotron p-5 mb-4 bg-light rounded-3">
         <h1>Segui i miei post</h1>

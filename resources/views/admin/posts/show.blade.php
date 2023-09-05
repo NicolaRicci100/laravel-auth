@@ -9,7 +9,8 @@
     <hr>
     <div class="clearfix">
         @if ($post->image)
-            <img class="float-start me-2 img-fluid" width="250" src="{{ $post->image }}" alt="{{ $post->title }}">
+            <img class="float-start me-2 img-fluid" width="250" src="{{ asset('storage/' . $post->image) }}"
+                alt="{{ $post->title }}">
         @endif
         <p>{{ $post->content }}</p>
         <div>

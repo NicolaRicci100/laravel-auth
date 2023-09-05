@@ -1,10 +1,10 @@
 @if ($post->exists)
     {{-- Se volgio modificare un post --}}
-    <form action="{{ route('admin.posts.update', $post) }}" method="POST" novalidate>
+    <form action="{{ route('admin.posts.update', $post) }}" method="POST" enctype="multipart/form-data" novalidate>
         @method('PUT')
     @else
         {{-- Se volgio aggiungere un post --}}
-        <form action="{{ route('admin.posts.store', $post) }}" method="POST" novalidate>
+        <form action="{{ route('admin.posts.store', $post) }}" method="POST" enctype="multipart/form-data" novalidate>
 @endif
 @csrf
 <div class="row">
@@ -31,13 +31,13 @@
     <div class="col-11">
         <div class="mb-3">
             <label for="image" class="form-label">Copertina</label>
-            <input type="url" class="form-control" id="image" name="image"
-                value="{{ old('image', $post->image) }}" placeholder="Inserisci un url valido">
+            <input type="file" class="form-control" id="image" name="image"
+                placeholder="Inserisci un url valido">
         </div>
     </div>
     <div class="col-1">
-        <img src="{{ old('image', $post->image ?? 'https://marcolanci.it/utils/placeholder.jpg') }}" alt="preview"
-            class="img-fluid" id="image-preview">
+        <img src="{{ $post->image ? asset('storage/' . $post->image) : 'https://marcolanci.it/utils/placeholder.jpg' }}"
+            alt="preview" class="img-fluid" id="image-preview">
     </div>
 </div>
 <hr>
